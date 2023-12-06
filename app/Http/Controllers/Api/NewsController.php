@@ -14,25 +14,27 @@ class NewsController extends Controller
     {
         $query = News::query();
 
-         // Apply category filter
-        if ($name = $request->query('category')) {
-            $query->where('category', 'like', "%{$request->category}%");
-        }
+        // Apply category filter
+        $query->when($request->query('category'), function ($q) use ($request) {
+            return $q->where('category', 'like', "%{$request->query('category')}%");
+        });
+
 
         // Apply date filter
-        if ($title = $request->query('date')) {
-            $query->whereDate('publishedAt', 'like', "%{$request->date}%");
-        }
+        $query->when($request->query('date'), function ($q) use ($request) {
+            return $q->whereDate('publishedAt', '>=', $request->query('date'));
+        });
 
         // Apply source filter
-        if ($date = $request->query('source')) {
-            $query->where('source', $request->source);
-        }  
-        
+        $query->when($request->query('source'), function ($q) use ($request) {
+            return $q->where('source', $request->query('source'));
+        });
+
+
         // Apply author filter
-        if ($date = $request->query('author')) {
-            $query->where('author', 'like', "%{$request->author}%");
-        }   
+        $query->when($request->query('author'), function ($q) use ($request) {
+            return $q->where('author', 'like', "%{$request->query('author')}%");
+        });
 
         $response = $query->get();
  

@@ -64,3 +64,16 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+##
+
+Steps to run the project
+
+1 - Update the env with database name 
+2 - Run the migration 'php artisan migrate'
+3 - Run the project by using 'php artisan migrate'
+4 - Run Api URL '127.0.0.1:8000/api/news-list?category=Article&source=MacRumors&publishedAt=2023-11-15&author=Juli Clover'
+5 - First parameter for api is category "Article/News"
+6 - Second parameter for api is source "MacRumors"
+7 - Third parameter for api is publishedAt "2023-11-15"
+8 - Fourth parameter for api is author "2023-11-15"
